@@ -1,26 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Dropdown from './Dropdown';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      room_number : null,
+      device_mac : null,
+      switch_state : false,
+    };
+  }
+  render(){
+    return (
+      <div className="App">
+        <Dropdown />
+        { /* The display section */ 
+          /*  Selected room */
+        }
+      </div>
+    );
+  }
+} 
 
 export default App;
