@@ -1,5 +1,6 @@
 import React from 'react';
 import Dropdown from './Dropdown';
+import Details from './Details';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,7 +14,10 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
+        <br></br>
         <Dropdown />
+        <br></br>
+        <Details />
         { /* The display section */ 
           /*  Selected room */
         }

@@ -3,15 +3,23 @@ import React from 'react';
 class Dropdown extends React.Component {
     render(){
         return (
-            <div className="dropdown">
-                <button className="dropbtn">Dropdown</button>
-                <div className="dropdown-content">
-                    <a href="https://google.com">Link 1</a>
-                    <a href="https://google.com">Link 2</a>
-                    <a href="https://google.com">Link 3</a>
+            <div className = "container-fluid" align="center">
+                <div className="dropdown">
+                    <button className="dropbtn">Select Room</button>
+                    <div className="dropdown-content">
+                        <a href="https://google.com">Room 1</a>
+                        <a href="https://google.com">Room 2</a>
+                        <a href="https://google.com">Room 3</a>
+                        <a href="https://google.com">Room 2</a>
+                        <a href="https://google.com">Room 2</a>
+                        <a href="https://google.com">Room 2</a>
+                        <a href="https://google.com">Room 2</a>
+                        <a href="https://google.com">Room 2</a>
+                        <a href="https://google.com">Room 2</a>
+                    </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 
