@@ -1,25 +1,27 @@
 import React from 'react';
 import FetchDetails from './Fetch_Details';
+import { connect } from 'react-redux';
 
 class Details extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            room_number: "C314"
-        }
-    }
     
     render(){
+        const selected_room = this.props.selected_room;
         return (
             <div className = "container" bgcolor="grey">
-                <h2 className= "container">{ this.state.room_number.length ? this.state.room_number: "No room selected"}</h2>
+                <h2 className= "container">{ selected_room!=="" ? selected_room: "No room selected"}</h2>
                 <br></br>
                 <div className = "container">
-                     {this.state.room_number ? <FetchDetails room = {this.state.room_number} /> : "No Details to Display"}
+                     <FetchDetails />
                 </div>
             </div>
         );
     }
 }
 
-export default Details;
+const mapStateToProps = (state) => {
+    return {
+        selected_room : state.selected
+    }
+}
+
+export default connect(mapStateToProps)(Details);
