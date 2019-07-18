@@ -3,14 +3,14 @@ import Dropdown from './Dropdown';
 import Details from './Details';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      room_number : null,
-      device_mac : null,
-      switch_state : false,
-    };
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     room_number : null,
+  //     device_mac : null,
+  //     switch_state : false,
+  //   };
+  // }
   render(){
     return (
       <div className="App">

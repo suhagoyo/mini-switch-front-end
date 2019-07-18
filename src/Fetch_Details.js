@@ -7,32 +7,31 @@ class FetchDetails extends React.Component {
         
         const rooms = this.props.rooms;
         const selected_room = this.props.selected_room;
-        console.log(selected_room);
+        //console.log(selected_room);
         //use filter instead of map
         let roomList;
-        if(selected_room!=="") {
-            roomList = rooms.map(room => {
-                return (
-                    <div className = "Room_Details" key = {room.room_number}>
-                        <div className = "Room_Number"> {room.room_number} </div>
-                        <div className = "Switch_State"> {room.switch_state ? "ON" : "OFF"} </div>
-                        <div className = "Device_ID"> {room.device_mac} </div>
-                    </div>
-                )
+        if(selected_room) {
+            roomList = rooms.filter(room => {
+                return room.room_number===selected_room;
             })
         }
+        else {
+            roomList = "No room selected";
+        }
+        //console.log(roomList[0]);
 
         return (
-            <div className = "room">
-                {selected_room==="" ? "No details to display" : roomList}
-            </div>
+                <div className = "Room_Details">
+                    <div className = "Switch_State"> Switch State: {selected_room ? (roomList[0].switch_state ? "ON" : "OFF") : ""} </div>
+                    <div className = "Device_ID"> Device Address: {selected_room ? roomList[0].device_mac : ""} </div>
+                </div>
         )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        selected_room : state.selected,
+        selected_room : state.selected_room,
         rooms : state.rooms
     }
 }
