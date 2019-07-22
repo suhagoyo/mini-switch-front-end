@@ -18,9 +18,6 @@ class App extends React.Component {
         <Dropdown />
         <br></br>
         <Details />
-        { /* The display section */ 
-          /*  Selected room */
-        }
       </div>
     );
   }
