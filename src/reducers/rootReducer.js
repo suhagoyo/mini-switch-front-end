@@ -1,11 +1,11 @@
 const initState = {
-    //selected : false,
     selected_room : "",
+    //toggle: ""
     rooms : [
-        {room_number: "C314", device_mac: "asdfasdf", switch_state: true},
-        {room_number: "C315", device_mac: "qweckjso", switch_state: false},
-        {room_number: "C313", device_mac: "unabdlfl ", switch_state: true},
-        {room_number: "None", device_mac: "", switch_state: false}
+        {roomNo: "C314", deviceId: "asdfasdf", status: true},
+        {roomNo: "C315", deviceId: "qweckjso", status: false},
+        {roomNo: "C313", deviceId: "unabdlfl ", status: true},
+        {roomNo: "None", deviceId: "", status: false}
     ]
 }
 
@@ -13,15 +13,48 @@ const rootReducer = (state = initState, action) => {
     console.log(action);
 
     if(action.type === "SET_SELECTED") {
-        // let new_room;
-        // if(action.room_number!=="None")
-        //     new_room = "";
-        // else
-        let new_room = action.room_number;
-        console.log(new_room);
+        let new_room = action.roomNo;
+        //console.log(new_room);
+        // console.log("State before selecting room: ",state);
         return {
             ...state,
             selected_room : new_room
+        }
+    }
+    else if(action.type === "SET_ROOMS") {
+        let new_room_list = action.roomList;
+        return {
+            ...state,
+            rooms : new_room_list
+        }
+    }
+    else if(action.type === "TOGGLE_SWITCH") {
+        // console.log("New state: ", state);
+        
+        // console.log("Selected room: ",action.roomNo);
+        // console.log("Current state: ",state);
+        let temp_rooms = state.rooms;
+        
+        //DONT DELETE THESE COMMENTS. THEY EXPOSE A CHROME CONSOLE BUG
+        // console.log(temp_rooms[0]);
+        // console.log("Temp array: ", temp_rooms)
+        // console.log(temp_rooms[0].status);
+        
+        let arr_length = temp_rooms.length;
+        console.log("Array length: ",arr_length);
+
+        for(let i=0;i<arr_length;i++) {
+            if(temp_rooms[i].roomNo === action.roomNo) {
+                //console.log("Room number(in loop): ", temp_rooms[i].roomNo);
+                //console.log("Switch status pre toggle: ", temp_rooms[i].status);
+                temp_rooms[i].status = !(temp_rooms[i].status);
+                //console.log("Switch status post toggle: ", temp_rooms[i].status);
+            }
+        }
+        // console.log("New Temp array: ", temp_rooms);
+        return {
+            ...state,
+            temp_rooms
         }
     }
 

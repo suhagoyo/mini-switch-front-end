@@ -6,9 +6,9 @@ class App extends React.Component {
   // constructor(props) {
   //   super(props);
   //   this.state = {
-  //     room_number : null,
-  //     device_mac : null,
-  //     switch_state : false,
+  //     roomNo : null,
+  //     deviceId : null,
+  //     status : false,
   //   };
   // }
   render(){

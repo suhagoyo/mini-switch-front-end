@@ -5,9 +5,8 @@ import { connect } from 'react-redux';
 class Details extends React.Component {
     
     render(){
-        //cosnt selected = this.props.selected;
         const selected_room = this.props.selected_room;
-        //console.log(selected_room);
+        
         return (
             <div className = "container" bgcolor="grey">
                 <h2 className= "container">{ selected_room ? selected_room : "No room selected"}</h2>
@@ -16,19 +15,14 @@ class Details extends React.Component {
                      <FetchDetails />
                 </div>
             </div>
-            // <div>
-            //     {this.props.selected_room}
-            //     {selected_room}
-            //     {selected_room ? selected_room : "No room selected"}
-            // </div>
         );
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        //selected : state.selected,
-        selected_room : state.selected_room
+        selected_room : state.selected_room,
+        rooms : state.rooms
     }
 }
 
