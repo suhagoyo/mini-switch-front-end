@@ -1,6 +1,7 @@
 import React from 'react';
 import Dropdown from './Dropdown';
 import Details from './Details';
+import './App.css';
 
 class App extends React.Component {
   // constructor(props) {

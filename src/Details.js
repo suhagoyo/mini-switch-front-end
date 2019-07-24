@@ -8,10 +8,10 @@ class Details extends React.Component {
         const selected_room = this.props.selected_room;
         
         return (
-            <div className = "container" bgcolor="grey">
+            <div className = "container">
                 <h2 className= "container">{ selected_room ? selected_room : "No room selected"}</h2>
                 <br></br>
-                <div className = "container">
+                <div className = "container-details">
                      <FetchDetails />
                 </div>
             </div>
@@ -22,7 +22,6 @@ class Details extends React.Component {
 const mapStateToProps = (state) => {
     return {
         selected_room : state.selected_room,
-        rooms : state.rooms
     }
 }
 
