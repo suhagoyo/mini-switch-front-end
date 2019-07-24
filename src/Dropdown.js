@@ -1,24 +1,24 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import * as actions from './actions';
+import { bindActionCreators } from 'redux';
 
 class Dropdown extends React.Component {
 
     componentDidMount(){
-        axios.get('http://10.1.0.193:8080/rooms/details')
+        axios.get('http://10.1.4.234:8080/rooms/details')
         .then(res => {
             let roomList = res.data;
-            //console.log(roomList);
-            this.props.setRoomList(roomList);  
+            this.props.actions.setRoomList(roomList);  
         })
     }
 
     render(){
-        //console.log(this.props);
         const rooms = this.props.rooms;
 
         const handleClick = (roomno) => {
-            this.props.setSelected(roomno)
+            this.props.actions.setSelected(roomno)
         }
 
         const room_list = rooms.map(room => {
@@ -28,7 +28,6 @@ class Dropdown extends React.Component {
                 </div>
             )
         })
-        //console.log(room_list);
         
         return (
             <div className = "container-fluid" align="center">
@@ -51,8 +50,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setSelected : (roomNo) => { dispatch ({ type: "SET_SELECTED", roomNo: roomNo }) },
-        setRoomList : (roomList) => { dispatch ({ type: "SET_ROOMS", roomList: roomList }) }
+        // setSelected : (roomNo) => { dispatch ({ type: "SET_SELECTED", roomNo: roomNo }) },
+        // setRoomList : (roomList) => { dispatch ({ type: "SET_ROOMS", roomList: roomList }) }
+        actions: bindActionCreators(actions, dispatch)
     }
 }
 
