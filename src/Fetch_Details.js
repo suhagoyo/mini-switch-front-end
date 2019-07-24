@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Axios from 'axios';
 import * as actions from './actions';
 import { bindActionCreators } from 'redux';
+import { toggleSwitch } from './APICalls';
 
 class FetchDetails extends React.Component {
     
@@ -23,7 +23,6 @@ render () {
         //console.log(roomList[0]);
         const handleClick = (roomNo) => {
             console.log("TOGGLE CLICKED");
-            // console.log(rooms[0].status)
             
             this.props.actions.toggle_switch(roomNo);
             // this.props.toggle_switch(roomNo);
@@ -40,11 +39,7 @@ render () {
                 isVarified : temp[0].isVarified 
             }
             console.log("Return object: ",ret_obj);
-            Axios.put('http://10.1.4.234:8080/rooms/details', ret_obj)
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
-            })
+            toggleSwitch(ret_obj);
         }
         
         return (
