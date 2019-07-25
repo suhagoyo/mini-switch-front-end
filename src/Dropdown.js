@@ -7,16 +7,9 @@ import { getRooms } from './APICalls';
 class Dropdown extends React.Component {
 
     componentDidMount(){
-        // axios.get('http://10.1.4.234:8080/rooms/details')
-        // .then(res => {
-        //     let roomList = res.data;
-        //     this.props.actions.setRoomList(roomList);  
-        //     // console.log(roomList)
-        // })
         getRooms(res => {
             let roomList = res;
             this.props.actions.setRoomList(roomList);
-            console.log(roomList);
         })
     }
 
@@ -56,8 +49,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // setSelected : (roomNo) => { dispatch ({ type: "SET_SELECTED", roomNo: roomNo }) },
-        // setRoomList : (roomList) => { dispatch ({ type: "SET_ROOMS", roomList: roomList }) }
         actions: bindActionCreators(actions, dispatch)
     }
 }

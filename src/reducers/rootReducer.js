@@ -1,6 +1,8 @@
 import * as constants from '../constants';
+import { toggleSwitch } from '../APICalls';
 
 const initState = {
+    toggle_time : "",
     selected_room : "",
     rooms : [
         {roomNo: "C314", deviceId: "asdfasdf", status: true},
@@ -11,7 +13,7 @@ const initState = {
 }
 
 const rootReducer = (state = initState, action) => {
-    console.log(action);
+    // console.log(action);
 
     if(action.type === constants.SET_SELECTED) {
         let new_room = action.roomNo;
@@ -30,23 +32,31 @@ const rootReducer = (state = initState, action) => {
     else if(action.type === constants.TOGGLE_SWITCH) {
         let temp_rooms = state.rooms;
         
-        //DONT DELETE THESE COMMENTS. THEY EXPOSE A CHROME CONSOLE BUG
+        //DONT DELETE THE COMMENTS BELOW THIS. THEY EXPOSE A CHROME CONSOLE BUG
         // console.log(temp_rooms[0]);
         // console.log("Temp array: ", temp_rooms)
         // console.log(temp_rooms[0].status);
-        
-        let arr_length = temp_rooms.length;
-        console.log("Array length: ",arr_length);
+        //DON'T DELETE THE COMMENTS ABOVE THIS. THEY EXPOSE A CHROME CONSOLE BUG
 
+        let arr_length = temp_rooms.length;
+
+        let index;
         for(let i=0;i<arr_length;i++) {
             if(temp_rooms[i].roomNo === action.roomNo) {
-                temp_rooms[i].status = !(temp_rooms[i].status);
+                temp_rooms[i].desiredSwitchStatus = !(temp_rooms[i].desiredSwitchStatus);
+                index = i;
             }
         }
+        let ret_obj = temp_rooms[index];
+
+        toggleSwitch(ret_obj);
+        
+        let today = new Date();
+        let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
         return {
             ...state,
-            temp_rooms
-        }
+            toggle_time : time
+        } 
     }
 
     return state;

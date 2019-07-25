@@ -2,58 +2,50 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from './actions';
 import { bindActionCreators } from 'redux';
-import { toggleSwitch } from './APICalls';
+import { getRooms } from './APICalls';
 
 class FetchDetails extends React.Component {
-    
-render () {
-        const rooms = this.props.state.rooms;
-        //console.log(rooms);
-        
-        const selected_room = this.props.state.selected_room;
-        let roomList;
-        if(selected_room) {
-            roomList = rooms.filter(room => {
-                return room.roomNo===selected_room;
-            })
-        }
-        else {
-            roomList = "No room selected";
-        }
-        //console.log(roomList[0]);
-        const handleClick = (roomNo) => {
-            console.log("TOGGLE CLICKED");
-            
-            this.props.actions.toggle_switch(roomNo);
-            // this.props.toggle_switch(roomNo);
 
-            let temp = this.props.state.rooms.filter(room => {
-                return room.roomNo === roomNo
-            })
-            console.log("State after toggle: ",this.props.state.rooms[0]);
-            //console.log("Filtered Object: ",temp);
-            let ret_obj = {
-                roomNo : temp[0].roomNo,
-                deviceId : temp[0].deviceId,
-                status : temp[0].status,
-                isVarified : temp[0].isVarified 
+    render () {
+            const rooms = this.props.state.rooms;
+            //console.log(rooms);
+            
+            const selected_room = this.props.state.selected_room;
+            let roomList;
+            if(selected_room) {
+                roomList = rooms.filter(room => {
+                    return room.roomNo===selected_room;
+                })
             }
-            console.log("Return object: ",ret_obj);
-            toggleSwitch(ret_obj);
+            else {
+                roomList = "No room selected";
+            }
+            const handleClick = (roomNo) => {
+                this.props.actions.toggle_switch(roomNo);
+            }
+
+            setInterval(getRooms(res => {
+                this.props.actions.setRoomList(res);
+                // console.log(res);
+            }), 10000);
+            
+            return (
+                <div className = "Room_Details">
+                    {selected_room && 
+                        <div>
+                        <div className = "Device_ID"> Device Address: {roomList[0].deviceId} </div>
+                        <div className = "Actualstatus"> Switch State: {roomList[0].actualSwitchStatus ? "ON" : "OFF"} </div>
+                        <button onClick={() => {handleClick(selected_room)}}>Toggle Switch</button>
+                        <div className = "Toggle_time">
+                            {//this.props.state.toggle_time && 
+                            roomList[0].actualSwitchStatus!==roomList[0].desiredSwitchStatus ?
+                                    "Switch toggled at: " + this.props.state.toggle_time : ""}    
+                        </div>
+                        </div>
+                    }
+                </div>
+            )
         }
-        
-        return (
-            <div className = "Room_Details">
-                {selected_room && 
-                    <div>
-                    <div className = "Device_ID"> Device Address: {roomList[0].deviceId} </div>
-                    <div className = "status"> Switch State: {roomList[0].status ? "ON" : "OFF"} </div>
-                    <button onClick={() => {handleClick(selected_room)}}>Toggle Switch</button>
-                    </div>
-                }
-            </div>
-        )
-    }
 }
 
 const mapStateToProps = (state) => {
