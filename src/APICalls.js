@@ -22,7 +22,7 @@ export function toggleSwitch (obj) {
             console.log(res);
             getRooms(data => {
                 let roomList = data;
-                this.props.actions.setRoomList(roomList);
+                actions.setRoomList(roomList);
             });
         }
     })

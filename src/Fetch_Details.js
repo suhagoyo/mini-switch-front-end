@@ -6,6 +6,13 @@ import { getRooms } from './APICalls';
 
 class FetchDetails extends React.Component {
 
+    // componentDidMount() {
+    //     setInterval(getRooms(res => {
+    //         this.props.actions.setRoomList(res);
+    //         // console.log(res);
+    //     }), 10000);
+    // }
+    
     render () {
             const rooms = this.props.state.rooms;
             //console.log(rooms);

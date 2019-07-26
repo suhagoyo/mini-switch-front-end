@@ -5,9 +5,9 @@ const initState = {
     toggle_time : "",
     selected_room : "",
     rooms : [
-        {roomNo: "C314", deviceId: "asdfasdf", status: true},
-        {roomNo: "C315", deviceId: "qweckjso", status: false},
-        {roomNo: "C313", deviceId: "unabdlfl ", status: true},
+        {roomNo: "C314", deviceId: "asdfasdf", actualSwitchStatus: false},
+        {roomNo: "C315", deviceId: "qweckjso", actualSwitchStatus: false},
+        {roomNo: "C313", deviceId: "unabdlfl ", actualSwitchStatus: true},
         {roomNo: "None", deviceId: "", status: false}
     ]
 }
